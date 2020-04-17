@@ -8,7 +8,7 @@ and open the template in the editor.
    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
    <head>
       <meta charset="UTF-8">
-      <title>Product List</title>
+      <title>Ticket List</title>
       <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
             <style>html {
     background: white;
@@ -87,7 +87,7 @@ body {
     border: 1px solid #ccc;
     padding: 0px 5px;
 }
-.product-preview-container {
+.ticket-preview-container {
     border: 1px solid #ccc;
     padding: 5px;
     width: 250px;
@@ -96,12 +96,12 @@ body {
     text-align:left;
 }
   
-.product-preview-container input {
+.ticket-preview-container input {
     width: 50px;
 }
   
   
-.product-image {
+.ticket-image {
     width: 120px;
     height: 80px;
 }
@@ -158,32 +158,32 @@ table td {
       <th:block th:include="/_header"></th:block>
       <th:block th:include="/_menu"></th:block>
        
-      <div class="page-title">Product List</div>
+      <div class="page-title">Ticket List</div>
        
-      <div class="product-preview-container" th:each="prodInfo : ${paginationProducts.list}">
+      <div class="ticket-preview-container" th:each="prodInfo : ${paginationTickets.list}">
          <ul>
            
             <li>Code: <span th:utext="${prodInfo.code}"></span></li>
             <li>Name: <span th:utext="${prodInfo.name}"></span></li>
             <li>Price: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span></li>
             <li>
-               <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">Buy Now</a>
+               <a th:href="@{|/buyTicket?code=${prodInfo.code}|}">Buy Now</a>
             </li>
-            <!-- For Manager edit Product -->
+            <!-- For Manager edit Ticket -->
             <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
                <li>
                  <a style="color:red;"
-                    th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
+                    th:href="@{|/admin/ticket?code=${prodInfo.code}|}">Edit Ticket</a>
                </li>
             </th:block>
          </ul>
       </div>
        
       <br/>
-      <div class="page-navigator" th:if="${paginationProducts.totalPages > 1}">
-         <th:block th:each="page : ${paginationProducts.navigationPages}">
+      <div class="page-navigator" th:if="${paginationTickets.totalPages > 1}">
+         <th:block th:each="page : ${paginationTickets.navigationPages}">
          
-            <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+            <a th:href="@{|/ticketList?page=${page}|}" th:if="${page != -1}"
                class="nav-item" th:utext="${page}"></a>
                
             <span class="nav-item" th:if="${page == -1}"> ... </span>

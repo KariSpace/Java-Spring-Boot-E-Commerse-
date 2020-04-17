@@ -19,10 +19,10 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class ProductFormValidator implements Validator {
+public class TicketFormValidator implements Validator {
  
    @Autowired
-   private TicketDAO productDAO;
+   private TicketDAO ticketDAO;
  
    // This validator only checks for the TicketForm.
    @Override
@@ -32,21 +32,21 @@ public class ProductFormValidator implements Validator {
  
    @Override
    public void validate(Object target, Errors errors) {
-      TicketForm productForm = (TicketForm) target;
+      TicketForm ticketForm = (TicketForm) target;
  
       // Check the fields of TicketForm.
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
-      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.ticketForm.code");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.ticketForm.name");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.ticketForm.price");
  
-      String code = productForm.getCode();
+      String code = ticketForm.getCode();
       if (code != null && code.length() > 0) {
          if (code.matches("\\s+")) {
-            errors.rejectValue("code", "Pattern.productForm.code");
-         } else if (productForm.isNewTicket()) {
-            Ticket product = productDAO.findTicket(code);
-            if (product != null) {
-               errors.rejectValue("code", "Duplicate.productForm.code");
+            errors.rejectValue("code", "Pattern.ticketForm.code");
+         } else if (ticketForm.isNewTicket()) {
+            Ticket ticket = ticketDAO.findTicket(code);
+            if (ticket != null) {
+               errors.rejectValue("code", "Duplicate.ticketForm.code");
             }
          }
       }

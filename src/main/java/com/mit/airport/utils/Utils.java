@@ -15,7 +15,7 @@ import com.mit.airport.model.CartInfo;
  
 public class Utils {
  
-   // Products in the cart, stored in Session.
+   // Tickets in the cart, stored in Session.
    public static CartInfo getCartInSession(HttpServletRequest request) {
  
       CartInfo cartInfo = (CartInfo) request.getSession().getAttribute("myCart");

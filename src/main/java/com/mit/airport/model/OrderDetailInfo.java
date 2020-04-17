@@ -13,8 +13,8 @@ package com.mit.airport.model;
 public class OrderDetailInfo {
     private String id;
  
-    private String productCode;
-    private String productName;
+    private String ticketCode;
+    private String ticketName;
  
     private int quanity;
     private double price;
@@ -25,11 +25,11 @@ public class OrderDetailInfo {
     }
  
     // Using for JPA/Hibernate Query.
-    public OrderDetailInfo(String id, String productCode, //
-            String productName, int quanity, double price, double amount) {
+    public OrderDetailInfo(String id, String ticketCode, //
+            String ticketName, int quanity, double price, double amount) {
         this.id = id;
-        this.productCode = productCode;
-        this.productName = productName;
+        this.ticketCode = ticketCode;
+        this.ticketName = ticketName;
         this.quanity = quanity;
         this.price = price;
         this.amount = amount;
@@ -43,20 +43,20 @@ public class OrderDetailInfo {
         this.id = id;
     }
  
-    public String getProductCode() {
-        return productCode;
+    public String getTicketCode() {
+        return ticketCode;
     }
  
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setTicketCode(String ticketCode) {
+        this.ticketCode = ticketCode;
     }
  
-    public String getProductName() {
-        return productName;
+    public String getTicketName() {
+        return ticketName;
     }
  
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setTicketName(String ticketName) {
+        this.ticketName = ticketName;
     }
  
     public int getQuanity() {

@@ -14,7 +14,7 @@ import com.mit.airport.form.TicketForm;
 import com.mit.airport.model.OrderDetailInfo;
 import com.mit.airport.model.OrderInfo;
 import com.mit.airport.pangination.PaginationResult;
-import com.mit.airport.validator.ProductFormValidator;
+import com.mit.airport.validator.TicketFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,7 +48,7 @@ public class AdminController {
    private TicketDAO tickettDAO;
  
    @Autowired
-   private ProductFormValidator productFormValidator;
+   private TicketFormValidator ticketFormValidator;
  
    @InitBinder
    public void myInitBinder(WebDataBinder dataBinder) {
@@ -59,7 +59,7 @@ public class AdminController {
       System.out.println("Target=" + target);
  
       if (target.getClass() == TicketForm.class) {
-         dataBinder.setValidator(productFormValidator);
+         dataBinder.setValidator(ticketFormValidator);
       }
    }
  
@@ -101,7 +101,7 @@ public class AdminController {
    }
  
    // GET: Show ticket.
-   @RequestMapping(value = { "/admin/product" }, method = RequestMethod.GET)
+   @RequestMapping(value = { "/admin/ticket" }, method = RequestMethod.GET)
    public String ticket(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
       TicketForm ticketForm = null;
  

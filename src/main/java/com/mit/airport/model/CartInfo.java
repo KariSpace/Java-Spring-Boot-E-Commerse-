@@ -54,13 +54,13 @@ public class CartInfo {
         return null;
     }
  
-    public void addTicket(TicketInfo productInfo, int quantity) {
-        CartLineInfo line = this.findLineByCode(productInfo.getCode());
+    public void addTicket(TicketInfo ticketInfo, int quantity) {
+        CartLineInfo line = this.findLineByCode(ticketInfo.getCode());
  
         if (line == null) {
             line = new CartLineInfo();
             line.setQuantity(0);
-            line.setProductInfo(productInfo);
+            line.setTicketInfo(ticketInfo);
             this.cartLines.add(line);
         }
         int newQuantity = line.getQuantity() + quantity;
@@ -75,7 +75,7 @@ public class CartInfo {
  
     }
  
-    public void updateProduct(String code, int quantity) {
+    public void updateTicket(String code, int quantity) {
         CartLineInfo line = this.findLineByCode(code);
  
         if (line != null) {
@@ -87,8 +87,8 @@ public class CartInfo {
         }
     }
  
-    public void removeTicket(TicketInfo productInfo) {
-        CartLineInfo line = this.findLineByCode(productInfo.getCode());
+    public void removeTicket(TicketInfo ticketInfo) {
+        CartLineInfo line = this.findLineByCode(ticketInfo.getCode());
         if (line != null) {
             this.cartLines.remove(line);
         }
@@ -122,7 +122,7 @@ public class CartInfo {
         if (cartForm != null) {
             List<CartLineInfo> lines = cartForm.getCartLines();
             for (CartLineInfo line : lines) {
-                this.updateProduct(line.getTicketInfo().getCode(), line.getQuantity());
+                this.updateTicket(line.getTicketInfo().getCode(), line.getQuantity());
             }
         }
  

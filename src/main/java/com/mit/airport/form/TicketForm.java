@@ -28,10 +28,10 @@ public class TicketForm {
         this.newTicket= true;
     }
  
-    public TicketForm(Ticket product) {
-        this.code = product.getCode();
-        this.name = product.getName();
-        this.price = product.getPrice();
+    public TicketForm(Ticket ticket) {
+        this.code = ticket.getCode();
+        this.name = ticket.getName();
+        this.price = ticket.getPrice();
     }
  
     public String getCode() {

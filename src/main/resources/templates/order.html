@@ -7,7 +7,7 @@ and open the template in the editor.
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="UTF-8">
-      <title>Product List</title>
+      <title>Ticket List</title>
       <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
             <style>html {
     background: white;
@@ -86,7 +86,7 @@ body {
     border: 1px solid #ccc;
     padding: 0px 5px;
 }
-.product-preview-container {
+.ticket-preview-container {
     border: 1px solid #ccc;
     padding: 5px;
     width: 250px;
@@ -95,12 +95,12 @@ body {
     text-align:left;
 }
   
-.product-preview-container input {
+.ticket-preview-container input {
     width: 50px;
 }
   
   
-.product-image {
+.ticket-image {
     width: 120px;
     height: 80px;
 }
@@ -178,15 +178,15 @@ table td {
       <br/>
       <table border="1" style="width:100%">
          <tr>
-            <th>Product Code</th>
-            <th>Product Name</th>
+            <th>Ticket Code</th>
+            <th>Ticket Name</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Amount</th>
          </tr>
          <tr th:each="orderDetailInfo : ${orderInfo.details}">
-            <td th:utext="${orderDetailInfo.productCode}"></td>
-            <td th:utext="${orderDetailInfo.productName}"></td>
+            <td th:utext="${orderDetailInfo.ticketCode}"></td>
+            <td th:utext="${orderDetailInfo.ticketName}"></td>
             <td th:utext="${orderDetailInfo.quanity}"></td>
             <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
             <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
