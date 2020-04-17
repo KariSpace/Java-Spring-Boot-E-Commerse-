@@ -261,18 +261,8 @@ public class MainController {
       return "shoppingCartFinalize";
    }
  
-   @RequestMapping(value = { "/productImage" }, method = RequestMethod.GET)
-   public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
-         @RequestParam("code") String code) throws IOException {
-      Product product = null;
-      if (code != null) {
-         product = this.productDAO.findProduct(code);
-      }
-      if (product != null && product.getImage() != null) {
-         response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-         response.getOutputStream().write(product.getImage());
-      }
-      response.getOutputStream().close();
-   }
+  
+     
+   
  
 }

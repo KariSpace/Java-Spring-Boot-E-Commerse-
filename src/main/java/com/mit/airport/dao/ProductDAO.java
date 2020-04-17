@@ -78,14 +78,7 @@ public class ProductDAO {
         product.setPrice(productForm.getPrice());
  
         if (productForm.getFileData() != null) {
-            byte[] image = null;
-            try {
-                image = productForm.getFileData().getBytes();
-            } catch (IOException e) {
-            }
-            if (image != null && image.length > 0) {
-                product.setImage(image);
-            }
+            
         }
         if (isNew) {
             session.persist(product);
