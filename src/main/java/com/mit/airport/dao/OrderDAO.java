@@ -25,7 +25,7 @@ import com.mit.airport.model.CartLineInfo;
 import com.mit.airport.model.CustomerInfo;
 import com.mit.airport.model.OrderDetailInfo;
 import com.mit.airport.model.OrderInfo;
-import com.mit.airport.pagination.PaginationResult;
+import com.mit.airport.pangination.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

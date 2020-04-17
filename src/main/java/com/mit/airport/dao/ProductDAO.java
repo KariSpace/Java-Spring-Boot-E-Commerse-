@@ -22,7 +22,7 @@ import org.hibernate.query.Query;
 import com.mit.airport.entity.Product;
 import com.mit.airport.form.ProductForm;
 import com.mit.airport.model.ProductInfo;
-import com.mit.airport.pagination.PaginationResult;
+import com.mit.airport.pangination.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
