@@ -93,11 +93,11 @@ public class MainController {
       final int maxResult = 5;
       final int maxNavigationPage = 10;
  
-      PaginationResult<TicketInfo> result = ticketDAO.queryTicket(page, //
+      PaginationResult<TicketInfo> result = ticketDAO.queryTickets(page, //
             maxResult, maxNavigationPage, likeName);
  
       model.addAttribute("paginationTickets", result);
-      return "tickettList";
+      return "ticketList";
    }
  
    @RequestMapping({ "/buyTicket" })

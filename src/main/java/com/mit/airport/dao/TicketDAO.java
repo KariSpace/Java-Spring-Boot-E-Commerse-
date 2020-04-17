@@ -87,7 +87,7 @@ public class TicketDAO {
         session.flush();
     }
  
-    public PaginationResult<TicketInfo> queryTicket(int page, int maxResult, int maxNavigationPage,
+    public PaginationResult<TicketInfo> queryTickets(int page, int maxResult, int maxNavigationPage,
             String likeName) {
         String sql = "Select new " + TicketInfo.class.getName() //
                 + "(p.code, p.name, p.price) " + " from "//
@@ -106,8 +106,8 @@ public class TicketDAO {
         return new PaginationResult<TicketInfo>(query, page, maxResult, maxNavigationPage);
     }
  
-    public PaginationResult<TicketInfo> queryTicket(int page, int maxResult, int maxNavigationPage) {
-        return TicketDAO.this.queryTicket(page, maxResult, maxNavigationPage, null);
+   
+    public PaginationResult<TicketInfo> queryTickets(int page, int maxResult, int maxNavigationPage) {
+        return queryTickets(page, maxResult, maxNavigationPage, null);
     }
- 
 }

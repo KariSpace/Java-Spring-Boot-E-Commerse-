@@ -45,7 +45,7 @@ public class AdminController {
    private OrderDAO orderDAO;
  
    @Autowired
-   private TicketDAO tickettDAO;
+   private TicketDAO ticketDAO;
  
    @Autowired
    private TicketFormValidator ticketFormValidator;
@@ -106,7 +106,7 @@ public class AdminController {
       TicketForm ticketForm = null;
  
       if (code != null && code.length() > 0) {
-         Ticket ticket = tickettDAO.findTicket(code);
+         Ticket ticket = ticketDAO.findTicket(code);
          if (ticket != null) {
             ticketForm = new TicketForm(ticket);
          }
@@ -115,7 +115,7 @@ public class AdminController {
          ticketForm = new TicketForm();
          ticketForm.setNewTicket(true);
       }
-      model.addAttribute("tiicketForm", ticketForm);
+      model.addAttribute("ticketForm", ticketForm);
       return "ticket";
    }
  
@@ -130,7 +130,7 @@ public class AdminController {
          return "ticket";
       }
       try {
-         tickettDAO.save(ticketForm);
+         ticketDAO.save(ticketForm);
       } catch (Exception e) {
          Throwable rootCause = ExceptionUtils.getRootCause(e);
          String message = rootCause.getMessage();
