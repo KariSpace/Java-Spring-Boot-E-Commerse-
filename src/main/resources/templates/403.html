@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Access Denied</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+   </head>
+    
+   <body>
+    
+      <th:block th:include="/_header"></th:block>
+      <th:block th:include="/_menu"></th:block>
+       
+      <div class="page-title">Access Denied!</div>
+      <h3 style="color:red;">Sorry, you can not access this page!</h3>
+       
+      <th:block th:include="/_footer"></th:block>
+       
+   </body>
+</html>
