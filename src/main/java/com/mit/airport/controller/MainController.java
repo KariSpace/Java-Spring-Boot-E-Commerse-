@@ -8,15 +8,15 @@ package com.mit.airport.controller;
 import java.io.IOException;
  
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
  
 import com.mit.airport.dao.OrderDAO;
-import com.mit.airport.dao.ProductDAO;
-import com.mit.airport.entity.Product;
+import com.mit.airport.dao.TicketDAO;
+import com.mit.airport.entity.Ticket;
 import com.mit.airport.form.CustomerForm;
 import com.mit.airport.model.CartInfo;
 import com.mit.airport.model.CustomerInfo;
-import com.mit.airport.model.ProductInfo;
+import com.mit.airport.model.TicketInfo;
 import com.mit.airport.pangination.PaginationResult;
 import com.mit.airport.utils.Utils;
 import com.mit.airport.validator.CustomerFormValidator;
@@ -48,7 +48,7 @@ public class MainController {
    private OrderDAO orderDAO;
  
    @Autowired
-   private ProductDAO productDAO;
+   private TicketDAO ticketDAO;
  
    @Autowired
    private CustomerFormValidator customerFormValidator;
@@ -85,63 +85,63 @@ public class MainController {
       return "index";
    }
  
-   // Product List
-   @RequestMapping({ "/productList" })
-   public String listProductHandler(Model model, //
+   // Ticket List
+   @RequestMapping({ "/ticketList" })
+   public String listTicketHandler(Model model, //
          @RequestParam(value = "name", defaultValue = "") String likeName,
          @RequestParam(value = "page", defaultValue = "1") int page) {
       final int maxResult = 5;
       final int maxNavigationPage = 10;
  
-      PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
+      PaginationResult<TicketInfo> result = ticketDAO.queryTicket(page, //
             maxResult, maxNavigationPage, likeName);
  
-      model.addAttribute("paginationProducts", result);
-      return "productList";
+      model.addAttribute("paginationTickets", result);
+      return "tickettList";
    }
  
-   @RequestMapping({ "/buyProduct" })
-   public String listProductHandler(HttpServletRequest request, Model model, //
+   @RequestMapping({ "/buyTicket" })
+   public String listTicketHandler(HttpServletRequest request, Model model, //
          @RequestParam(value = "code", defaultValue = "") String code) {
  
-      Product product = null;
+      Ticket ticket = null;
       if (code != null && code.length() > 0) {
-         product = productDAO.findProduct(code);
+         ticket = ticketDAO.findTicket(code);
       }
-      if (product != null) {
+      if (ticket != null) {
  
          //
          CartInfo cartInfo = Utils.getCartInSession(request);
  
-         ProductInfo productInfo = new ProductInfo(product);
+         TicketInfo ticketInfo = new TicketInfo(ticket);
  
-         cartInfo.addProduct(productInfo, 1);
+         cartInfo.addTicket(ticketInfo, 1);
       }
  
       return "redirect:/shoppingCart";
    }
  
-   @RequestMapping({ "/shoppingCartRemoveProduct" })
-   public String removeProductHandler(HttpServletRequest request, Model model, //
+   @RequestMapping({ "/shoppingCartRemoveTicket" })
+   public String removeTicketHandler(HttpServletRequest request, Model model, //
          @RequestParam(value = "code", defaultValue = "") String code) {
-      Product product = null;
+      Ticket ticket = null;
       if (code != null && code.length() > 0) {
-         product = productDAO.findProduct(code);
+         ticket = ticketDAO.findTicket(code);
       }
-      if (product != null) {
+      if (ticket != null) {
  
          CartInfo cartInfo = Utils.getCartInSession(request);
  
-         ProductInfo productInfo = new ProductInfo(product);
+         TicketInfo ticketInfo = new TicketInfo(ticket);
  
-         cartInfo.removeProduct(productInfo);
+         cartInfo.removeTicket(ticketInfo);
  
       }
  
       return "redirect:/shoppingCart";
    }
  
-   // POST: Update quantity for product in cart
+   // POST: Update quantity for ticket in cart
    @RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.POST)
    public String shoppingCartUpdateQty(HttpServletRequest request, //
          Model model, //

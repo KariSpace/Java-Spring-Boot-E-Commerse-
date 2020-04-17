@@ -10,7 +10,6 @@ package com.mit.airport.config;
  * @author Asus
  */
 import com.mit.airport.service.UserDetailsServiceImpl;
-import static javafx.scene.input.KeyCode.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
  
       // Pages only for MANAGER
-      http.authorizeRequests().antMatchers("/admin/product").access("hasRole('ROLE_MANAGER')");
+      http.authorizeRequests().antMatchers("/admin/ticket").access("hasRole('ROLE_MANAGER')");
  
       // When user login, role XX.
       // But access to the page requires the YY role,

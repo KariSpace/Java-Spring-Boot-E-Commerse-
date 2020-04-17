@@ -13,18 +13,18 @@ package com.mit.airport.model;
 
 public class CartLineInfo {
   
-    private ProductInfo productInfo;
+    private TicketInfo productInfo;
     private int quantity;
   
     public CartLineInfo() {
         this.quantity = 0;
     }
   
-    public ProductInfo getProductInfo() {
+    public TicketInfo getTicketInfo() {
         return productInfo;
     }
   
-    public void setProductInfo(ProductInfo productInfo) {
+    public void setProductInfo(TicketInfo productInfo) {
         this.productInfo = productInfo;
     }
   

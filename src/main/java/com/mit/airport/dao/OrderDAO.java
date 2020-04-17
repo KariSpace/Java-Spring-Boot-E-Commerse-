@@ -19,7 +19,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import com.mit.airport.entity.Order;
 import com.mit.airport.entity.OrderDetail;
-import com.mit.airport.entity.Product;
+import com.mit.airport.entity.Ticket;
 import com.mit.airport.model.CartInfo;
 import com.mit.airport.model.CartLineInfo;
 import com.mit.airport.model.CustomerInfo;
@@ -38,7 +38,7 @@ public class OrderDAO {
     private SessionFactory sessionFactory;
  
     @Autowired
-    private ProductDAO productDAO;
+    private TicketDAO ticketDAO;
  
     private int getMaxOrderNum() {
         String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
@@ -78,12 +78,12 @@ public class OrderDAO {
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
             detail.setAmount(line.getAmount());
-            detail.setPrice(line.getProductInfo().getPrice());
+            detail.setPrice(line.getTicketInfo().getPrice());
             detail.setQuanity(line.getQuantity());
  
-            String code = line.getProductInfo().getCode();
-            Product product = this.productDAO.findProduct(code);
-            detail.setProduct(product);
+            String code = line.getTicketInfo().getCode();
+            Ticket ticket = this.ticketDAO.findTicket(code);
+            detail.setTicket(ticket);
  
             session.persist(detail);
         }
@@ -124,7 +124,7 @@ public class OrderDAO {
  
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
         String sql = "Select new " + OrderDetailInfo.class.getName() //
-                + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
+                + "(d.id, d.ticket.code, d.ticket.name , d.quanity,d.price,d.amount) "//
                 + " from " + OrderDetail.class.getName() + " d "//
                 + " where d.order.id = :orderId ";
  

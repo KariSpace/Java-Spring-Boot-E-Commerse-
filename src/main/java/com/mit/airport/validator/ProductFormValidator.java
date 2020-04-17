@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package com.mit.airport.validator;
-import com.mit.airport.dao.ProductDAO;
-import com.mit.airport.entity.Product;
-import com.mit.airport.form.ProductForm;
+import com.mit.airport.dao.TicketDAO;
+import com.mit.airport.entity.Ticket;
+import com.mit.airport.form.TicketForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -22,19 +22,19 @@ import org.springframework.validation.Validator;
 public class ProductFormValidator implements Validator {
  
    @Autowired
-   private ProductDAO productDAO;
+   private TicketDAO productDAO;
  
-   // This validator only checks for the ProductForm.
+   // This validator only checks for the TicketForm.
    @Override
    public boolean supports(Class<?> clazz) {
-      return clazz == ProductForm.class;
+      return clazz == TicketForm.class;
    }
  
    @Override
    public void validate(Object target, Errors errors) {
-      ProductForm productForm = (ProductForm) target;
+      TicketForm productForm = (TicketForm) target;
  
-      // Check the fields of ProductForm.
+      // Check the fields of TicketForm.
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
@@ -43,8 +43,8 @@ public class ProductFormValidator implements Validator {
       if (code != null && code.length() > 0) {
          if (code.matches("\\s+")) {
             errors.rejectValue("code", "Pattern.productForm.code");
-         } else if (productForm.isNewProduct()) {
-            Product product = productDAO.findProduct(code);
+         } else if (productForm.isNewTicket()) {
+            Ticket product = productDAO.findTicket(code);
             if (product != null) {
                errors.rejectValue("code", "Duplicate.productForm.code");
             }

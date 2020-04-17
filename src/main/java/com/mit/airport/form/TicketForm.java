@@ -5,7 +5,7 @@
  */
 package com.mit.airport.form;
 
-import com.mit.airport.entity.Product;
+import com.mit.airport.entity.Ticket;
 import org.springframework.web.multipart.MultipartFile;
 /**
  *
@@ -14,21 +14,21 @@ import org.springframework.web.multipart.MultipartFile;
  
 
  
-public class ProductForm {
+public class TicketForm {
     private String code;
     private String name;
     private double price;
  
-    private boolean newProduct = false;
+    private boolean newTicket = false;
  
     // Upload file.
     private MultipartFile fileData;
  
-    public ProductForm() {
-        this.newProduct= true;
+    public TicketForm() {
+        this.newTicket= true;
     }
  
-    public ProductForm(Product product) {
+    public TicketForm(Ticket product) {
         this.code = product.getCode();
         this.name = product.getName();
         this.price = product.getPrice();
@@ -66,12 +66,12 @@ public class ProductForm {
         this.fileData = fileData;
     }
  
-    public boolean isNewProduct() {
-        return newProduct;
+    public boolean isNewTicket() {
+        return newTicket;
     }
  
-    public void setNewProduct(boolean newProduct) {
-        this.newProduct = newProduct;
+    public void setNewTicket(boolean newTicket) {
+        this.newTicket = newTicket;
     }
  
 }

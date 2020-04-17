@@ -4,29 +4,29 @@
  * and open the template in the editor.
  */
 package com.mit.airport.model;
-import com.mit.airport.entity.Product;
+import com.mit.airport.entity.Ticket;
 /**
  *
  * @author Asus
  */
 
  
-public class ProductInfo {
+public class TicketInfo {
     private String code;
     private String name;
     private double price;
  
-    public ProductInfo() {
+    public TicketInfo() {
     }
  
-    public ProductInfo(Product product) {
+    public TicketInfo(Ticket product) {
         this.code = product.getCode();
         this.name = product.getName();
         this.price = product.getPrice();
     }
  
     // Using in JPA/Hibernate query
-    public ProductInfo(String code, String name, double price) {
+    public TicketInfo(String code, String name, double price) {
         this.code = code;
         this.name = name;
         this.price = price;

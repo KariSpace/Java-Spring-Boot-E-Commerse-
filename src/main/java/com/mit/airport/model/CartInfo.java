@@ -47,14 +47,14 @@ public class CartInfo {
  
     private CartLineInfo findLineByCode(String code) {
         for (CartLineInfo line : this.cartLines) {
-            if (line.getProductInfo().getCode().equals(code)) {
+            if (line.getTicketInfo().getCode().equals(code)) {
                 return line;
             }
         }
         return null;
     }
  
-    public void addProduct(ProductInfo productInfo, int quantity) {
+    public void addTicket(TicketInfo productInfo, int quantity) {
         CartLineInfo line = this.findLineByCode(productInfo.getCode());
  
         if (line == null) {
@@ -87,7 +87,7 @@ public class CartInfo {
         }
     }
  
-    public void removeProduct(ProductInfo productInfo) {
+    public void removeTicket(TicketInfo productInfo) {
         CartLineInfo line = this.findLineByCode(productInfo.getCode());
         if (line != null) {
             this.cartLines.remove(line);
@@ -122,7 +122,7 @@ public class CartInfo {
         if (cartForm != null) {
             List<CartLineInfo> lines = cartForm.getCartLines();
             for (CartLineInfo line : lines) {
-                this.updateProduct(line.getProductInfo().getCode(), line.getQuantity());
+                this.updateProduct(line.getTicketInfo().getCode(), line.getQuantity());
             }
         }
  

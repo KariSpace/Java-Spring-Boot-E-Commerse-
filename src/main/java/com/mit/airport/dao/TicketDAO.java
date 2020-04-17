@@ -19,9 +19,9 @@ import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import com.mit.airport.entity.Product;
-import com.mit.airport.form.ProductForm;
-import com.mit.airport.model.ProductInfo;
+import com.mit.airport.entity.Ticket;
+import com.mit.airport.form.TicketForm;
+import com.mit.airport.model.TicketInfo;
 import com.mit.airport.pangination.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,84 +30,84 @@ import org.springframework.transaction.annotation.Transactional;
  
 @Transactional
 @Repository
-public class ProductDAO {
+public class TicketDAO {
  
     @Autowired
     private SessionFactory sessionFactory;
  
-    public Product findProduct(String code) {
+    public Ticket findTicket(String code) {
         try {
-            String sql = "Select e from " + Product.class.getName() + " e Where e.code =:code ";
+            String sql = "Select e from " + Ticket.class.getName() + " e Where e.code =:code ";
  
             Session session = this.sessionFactory.getCurrentSession();
-            Query<Product> query = session.createQuery(sql, Product.class);
+            Query<Ticket> query = session.createQuery(sql, Ticket.class);
             query.setParameter("code", code);
-            return (Product) query.getSingleResult();
+            return (Ticket) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
     }
  
-    public ProductInfo findProductInfo(String code) {
-        Product product = this.findProduct(code);
-        if (product == null) {
+    public TicketInfo findTicketInfo(String code) {
+        Ticket ticket = this.findTicket(code);
+        if (ticket == null) {
             return null;
         }
-        return new ProductInfo(product.getCode(), product.getName(), product.getPrice());
+        return new TicketInfo(ticket.getCode(), ticket.getName(), ticket.getPrice());
     }
  
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    public void save(ProductForm productForm) {
+    public void save(TicketForm ticketForm) {
  
         Session session = this.sessionFactory.getCurrentSession();
-        String code = productForm.getCode();
+        String code = ticketForm.getCode();
  
-        Product product = null;
+        Ticket ticket = null;
  
         boolean isNew = false;
         if (code != null) {
-            product = this.findProduct(code);
+            ticket = this.findTicket(code);
         }
-        if (product == null) {
+        if (ticket == null) {
             isNew = true;
-            product = new Product();
-            product.setCreateDate(new Date());
+            ticket = new Ticket();
+            ticket.setCreateDate(new Date());
         }
-        product.setCode(code);
-        product.setName(productForm.getName());
-        product.setPrice(productForm.getPrice());
+        ticket.setCode(code);
+        ticket.setName(ticketForm.getName());
+        ticket.setPrice(ticketForm.getPrice());
  
-        if (productForm.getFileData() != null) {
+        if (ticketForm.getFileData() != null) {
             
         }
         if (isNew) {
-            session.persist(product);
+            session.persist(ticket);
         }
         // If error in DB, Exceptions will be thrown out immediately
         session.flush();
     }
  
-    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
+    public PaginationResult<TicketInfo> queryTicket(int page, int maxResult, int maxNavigationPage,
             String likeName) {
-        String sql = "Select new " + ProductInfo.class.getName() //
+        String sql = "Select new " + TicketInfo.class.getName() //
                 + "(p.code, p.name, p.price) " + " from "//
-                + Product.class.getName() + " p ";
+                + Ticket.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";
         }
         sql += " order by p.createDate desc ";
         // 
         Session session = this.sessionFactory.getCurrentSession();
-        Query<ProductInfo> query = session.createQuery(sql, ProductInfo.class);
+        Query<TicketInfo> query = session.createQuery(sql, TicketInfo.class);
  
         if (likeName != null && likeName.length() > 0) {
             query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
         }
-        return new PaginationResult<ProductInfo>(query, page, maxResult, maxNavigationPage);
+        return new PaginationResult<TicketInfo>(query, page, maxResult, maxNavigationPage);
     }
  
-    public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage) {
-        return queryProducts(page, maxResult, maxNavigationPage, null);
+    public PaginationResult<TicketInfo> queryTicket(int page, int maxResult, int maxNavigationPage) {
+        return TicketDAO.this.queryTicket(page, maxResult, maxNavigationPage, null);
     }
  
 }

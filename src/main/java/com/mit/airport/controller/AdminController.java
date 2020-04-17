@@ -8,9 +8,9 @@ import java.util.List;
  
 import org.apache.commons.lang.exception.ExceptionUtils;
 import com.mit.airport.dao.OrderDAO;
-import com.mit.airport.dao.ProductDAO;
-import com.mit.airport.entity.Product;
-import com.mit.airport.form.ProductForm;
+import com.mit.airport.dao.TicketDAO;
+import com.mit.airport.entity.Ticket;
+import com.mit.airport.form.TicketForm;
 import com.mit.airport.model.OrderDetailInfo;
 import com.mit.airport.model.OrderInfo;
 import com.mit.airport.pangination.PaginationResult;
@@ -45,7 +45,7 @@ public class AdminController {
    private OrderDAO orderDAO;
  
    @Autowired
-   private ProductDAO productDAO;
+   private TicketDAO tickettDAO;
  
    @Autowired
    private ProductFormValidator productFormValidator;
@@ -58,7 +58,7 @@ public class AdminController {
       }
       System.out.println("Target=" + target);
  
-      if (target.getClass() == ProductForm.class) {
+      if (target.getClass() == TicketForm.class) {
          dataBinder.setValidator(productFormValidator);
       }
    }
@@ -100,46 +100,46 @@ public class AdminController {
       return "orderList";
    }
  
-   // GET: Show product.
+   // GET: Show ticket.
    @RequestMapping(value = { "/admin/product" }, method = RequestMethod.GET)
-   public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
-      ProductForm productForm = null;
+   public String ticket(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+      TicketForm ticketForm = null;
  
       if (code != null && code.length() > 0) {
-         Product product = productDAO.findProduct(code);
-         if (product != null) {
-            productForm = new ProductForm(product);
+         Ticket ticket = tickettDAO.findTicket(code);
+         if (ticket != null) {
+            ticketForm = new TicketForm(ticket);
          }
       }
-      if (productForm == null) {
-         productForm = new ProductForm();
-         productForm.setNewProduct(true);
+      if (ticketForm == null) {
+         ticketForm = new TicketForm();
+         ticketForm.setNewTicket(true);
       }
-      model.addAttribute("productForm", productForm);
-      return "product";
+      model.addAttribute("tiicketForm", ticketForm);
+      return "ticket";
    }
  
-   // POST: Save product
-   @RequestMapping(value = { "/admin/product" }, method = RequestMethod.POST)
-   public String productSave(Model model, //
-         @ModelAttribute("productForm") @Validated ProductForm productForm, //
+   // POST: Save ticket
+   @RequestMapping(value = { "/admin/ticket" }, method = RequestMethod.POST)
+   public String ticketSave(Model model, //
+         @ModelAttribute("ticketForm") @Validated TicketForm ticketForm, //
          BindingResult result, //
          final RedirectAttributes redirectAttributes) {
  
       if (result.hasErrors()) {
-         return "product";
+         return "ticket";
       }
       try {
-         productDAO.save(productForm);
+         tickettDAO.save(ticketForm);
       } catch (Exception e) {
          Throwable rootCause = ExceptionUtils.getRootCause(e);
          String message = rootCause.getMessage();
          model.addAttribute("errorMessage", message);
-         // Show product form.
-         return "product";
+         // Show ticket form.
+         return "ticket";
       }
  
-      return "redirect:/productList";
+      return "redirect:/ticketList";
    }
  
    @RequestMapping(value = { "/admin/order" }, method = RequestMethod.GET)
