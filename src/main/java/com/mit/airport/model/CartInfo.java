@@ -6,12 +6,13 @@
 package com.mit.airport.model;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author Asus
  */
 
- 
 public class CartInfo {
  
     private int orderNum;
