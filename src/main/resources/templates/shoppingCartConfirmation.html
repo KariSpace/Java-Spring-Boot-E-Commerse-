@@ -27,9 +27,9 @@ and open the template in the editor.
          </ul>
          <h3>Cart Summary:</h3>
          <ul>
-            <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
-            <li>Total:
-               <span class="total"
+            <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
+            <li>Total: &nbsp;
+               $<span class="total"
                   th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">  
                </span>
             </li>

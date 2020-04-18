@@ -36,9 +36,10 @@ and open the template in the editor.
                         </span>
                      </li>
                      <li>Quantity:
-                        <input
+                        <span
                             th:name="|cartLines[${varStatus.index}].quantity|"
-                            th:value="${cartLineInfo.quantity}" />
+                            th:utext=="${cartLineInfo.quantity}" />
+                      
                      </li>
                      <li>Subtotal:
                         <span class="subtotal"
@@ -58,10 +59,12 @@ and open the template in the editor.
                th:href="@{/shoppingCartCustomer}">Enter Customer Info</a>
             <a class="navi-item"
                th:href="@{/ticketList}">Continue Buy</a>
+            
          </form>
+         
       </th:block>
        
-      <th:block th:include="/_footer"></th:block>
+      
        
    </body>
 </html>

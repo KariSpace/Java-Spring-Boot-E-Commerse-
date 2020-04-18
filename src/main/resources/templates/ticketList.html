@@ -9,14 +9,18 @@
 
     <title>Buy Ticket</title>
 
+
+    
     <!-- Bootstrap -->
-    <!--   <link href="css/custom.css" rel="stylesheet">-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" >
-    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+
     <!-- fonts -->
     <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
-            
+    
+    
+    
    </head>
    <body>
 
@@ -25,18 +29,17 @@
             <img th:src="@{images/icons/preloader.gif}" />
         </div>
     </div>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-5 left-wrapper">
                 <div class="event-banner-wrapper">
                     <div class="logo">
-                        <h1>Booking Office</h1>
+                        <h1>Сontrol Panel</h1>
                     </div>
 
                     <h2>
-                        Airport<br>Created by
-                        <span>MIT-21</span>
+                        Airport<br>Date:
+                        <span>18 April 2020</span>
                     </h2>
                 </div>
             </div>
@@ -48,7 +51,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#buyTicket" aria-controls="buyTicket" role="tab" data-toggle="tab">Tickets</a></li>
-                            <li role="presentation"><a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">Airport Info</a></li>
+                            <li role="presentation"><a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">Airport</a></li>
 
 
                             <li role="presentation"><a href="#termCondition" aria-controls="termCondition" role="tab" data-toggle="tab">Terms & Conditions</a></li>
@@ -57,12 +60,10 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
-                            <div class="row">   
-                                
-                                
-                                
-                                
-                            <div class="ticket-preview-container" th:each="prodInfo : ${paginationTickets.list}">
+                                <div class="row">
+                                    
+                                    
+                                  <div class="ticket-preview-container" th:each="prodInfo : ${paginationTickets.list}">
                                  
                                      <div class="col-md-6">
                                         <div class="ticketBox" data-ticket-price = '100' >
@@ -85,21 +86,15 @@
                                                 <div class="col-xs-6">
                                                     <div class="ticket-price-count-box">
                                                         <div class="ticket-control">
-                                                            <div class="input-group">
-                                                                <span class="input-group-btn">
-                                                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                                          <span class="glyphicon glyphicon-minus"></span>
-                                                                </button>
-                                                                </span>
-                                                                <input type="text" name="quant[1]" class="form-control input-number" value="0" min="0" max="10">
-                                                                <span class="input-group-btn">
-                                                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-                                                          <span class="glyphicon glyphicon-plus"></span>
-                                                                </button>
-                                                                </span>
-                                                            </div>
                                                         </div>
-                                                        <p class="price"> <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span>$</p>
+                                                        <p class="price" style='margin-top: 15px;
+                                                            color: #000000;
+                                                            font-weight: 600;
+                                                            float: right;
+                                                            width: 100%;
+                                                            text-align: right;
+                                                            font-size: 22px;'>
+                                                     <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span>$</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,60 +103,186 @@
                                                 <p><strong>Please refer Venue Plan:</strong>
                                                     
                                                     <br>
-                                                    <a th:href="@{|/buyTicket?code=${prodInfo.code}|}">Buy Now</a>
+                                                      <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                                                        
+                                                             <a style="color:#290ab3;" th:href="@{|/admin/ticket?code=${prodInfo.code}|}">Edit Ticket</a>
+                                                          
+                                                        </th:block>
+                                                
+                                                    
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
                                                             <!-- For Manager edit Ticket -->
-                                                        <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-                                                           <li>
-                                                             <a  th:href="@{|/admin/ticket?code=${prodInfo.code}|}">Edit Ticket</a>
-                                                           </li>
-                                                        </th:block>
+                               
+                                                            <li>
+                                                               <a style="color:#290ab3; text-transform: uppercase;" th:href="@{|/buyTicket?code=${prodInfo.code}|}">Buy Now</a>
+                                                            </li>
+                                                        
                                             </div>
                                        </div>
                                      </div>
+                                      
                                 </div>
-                            </div>
-                          </div>
                         </div>
                     </div>
-                          <div role="tabpanel" class="tab-pane fade" id="venue">
-                        <h4> Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit,<br> sed do eiusmod<br> Pune 411058</h4><br>
-                        <iframe src="https://www.google.com/maps/d/embed?mid=1UMEBYRnM0KZhrhqikVv3YigwUd0" width="640" height="300"></iframe>
+                    <div role="tabpanel" class="tab-pane fade" id="venue">
+                        <div class=" widget widget_table-cell" data-gtm-vis-has-fired-7566271_199="1">
+<div class="widget__border-wrap" itemscope="" itemtype="http://schema.org/Airline">
+<h3 class="contacts__title" itemprop="name"><br>
+Boryspil International Airport</h3>
+<p class="contacts__phones"><span itemprop="telephone"><a href="tel:+380503980011">+38 (050) 398-00-11</a></span></p>
+<p class="contacts__time">08:00 - 19:00 (LT)</p>
+<p class="contacts__email" itemprop="email"><a href="mailto:lost.found@aeh.aero">lost.found@aeh.aero</a></p>
+<p class="contacts__text">Get information about baggage tracing online or at our Contact Center.</p><p>Once you have produced a detailed event concept and established that the event is viable, detailed venue planning can take place to progress from event concept to event implementation. The following activities should assist in this process:</p>
+</div>
+</div> <iframe src="https://www.google.com/maps/d/embed?mid=1UMEBYRnM0KZhrhqikVv3YigwUd0" width="640" height="300"></iframe>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="termCondition">
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+                        <div class="page-content_main-inner">
+<div class="page-intro">
+<h1 class="page-title">
+</h1>
+</div>
+<h3><span style="font-weight: normal;">Perth Airport Online Services - Terms of Use</span></h3>
+<strong>1. Application of these Terms of Use
+</strong>
+<p>Perth Airport Pty Ltd (PAPL, we, our, us) owns and/or operates the PAPL mobile application (PAPL APP).</p>
+<p>PAPL also owns and/or operates “Online Services” including:</p>
+<ul>
+<li><span style="font-weight: lighter;">our website;</span></li>
+<li><span style="font-weight: lighter;">WiFi;</span></li>
+<li><span style="font-weight: lighter;">free internet services;</span></li>
+<li><span style="font-weight: lighter;">email subscriptions; and&nbsp;</span></li>
+<li><span style="font-weight: lighter;">our social media platforms such as our Facebook page.</span></li>
+</ul>
+We provide the PAPL App and Online Services for members of the public and other users (Users) to access and share information.
+<div>&nbsp;<br>
+Your (you, your) access and use of our PAPL App and Online Services and the features and services available on them is governed by these terms of use (which include our Privacy Policy at www.perthairport.com.au &nbsp;together with any additional terms and conditions displayed on the PAPL App and Online Services (Terms of Use).</div>
+<p>You indicate your acceptance of the Terms of Use when you access an Online Service. To the extent of any conflict between these Terms of Use and our Privacy Policy, these Terms of Use will apply.</p>
+<p><span style="font-weight: lighter;">Subject to and in accordance with these Terms of Use, we grant you a personal, non-exclusive, non-transferable, revocable licence to use our PAPL App and Online Services.</span></p>
+<p><span style="font-weight: lighter;">You acknowledge that the PAPL App and Online Services are licensed to you and that no ownership rights in the PAPL App and Online Services pass to you and that you must use the PAPL App and Online Services in accordance with these Terms of Use.</span></p>
+<p><span style="font-weight: lighter;">We reserve the right to suspend, terminate or otherwise deal with your licence in relation to the PAPL App and Online Services at any time.</span></p>
+<p><span style="font-weight: lighter;">You acknowledge and agree that your access to and use of the PAPL App and Online Services will be at your own risk.</span></p>
+<p><strong>2. Changes to Terms of Use</strong></p>
+<p>If we change the Terms of Use we will publish an updated version under the ‘Terms of Use’ link accessible on the PAPL App and Online Services. Your access or use of an Online Service after an updated version of the Terms of Use has been made available indicates your acceptance of the Terms of Use as changed by us.</p>
+<p><strong>3. Accounts and passwords</strong></p>
+<p>If you create an account for using any of the services or features available on the PAPL App or an Online Service, you are responsible for all use of your username and/or password and must keep your username and/or password for that account confidential and secure from unauthorised access and/or use.<br>
+&nbsp;<br>
+<strong>
+4. Your Content</strong></p>
+<p>The PAPL App and Online Services may provide you with the ability to upload and publish materials including text, images, information, comments and other data (whether via email, comment, post, blog, enquiry or by any other means) to or through the PAPL App and Online Services (Content).</p>
+<p>You retain ownership of any Content you upload and publish (Your Content).</p>
+<p>Other Users retain ownership of any Content they upload and publish (User Content).<br>
+&nbsp;<br>
+<strong>
+5. Responsibility for Your Content</strong></p>
+<p>You acknowledge and agree that:</p>
+<p>(a) you own or have obtained all necessary rights to use and publish Your Content on the Online Services;</p>
+<p>(b) you create and provide Your Content at your own risk;</p>
+<p>(c) you can choose to share, publish or send Your Content via social media (such as Facebook and Twitter) and/or your personal email and messaging utilising the links available in the PAPL App and Online Services, in which case:<br>
+<span class="Apple-tab-span" style="white-space: pre;"> </span>(i) Your Content will also be subject to the terms and conditions applicable to those media and services; and<br>
+<span class="Apple-tab-span" style="white-space: pre;"> </span>(ii) we will not be responsible for any use any third party makes of Your Content;</p>
+<p>(d) you are personally responsible and liable for Your Content;</p>
+<p>(e) you are not entitled to any payment from us in respect of Your Content or our use of it;</p>
+<p>(f) we are not obliged to use, maintain or display Your Content on the Online Services;</p>
+<p>(g) Your Content does not contain any confidential information and may be seen by others;</p>
+<p>(h) we may use Your Content to publicise and promote us and our Online Services; and</p>
+<p>(i) we may, but have no obligation to, publish your name on the Online Services.<br>
+&nbsp;<br>
+<strong>
+6. Prohibitions on Your Content</strong></p>
+<p>Your Content must not include anything which:</p>
+<p>(a) you do not have the right to disclose or make available under law or an obligation you have to a third party (such as confidentiality agreements); or</p>
+<p>(b) reveals another person’s identity or sensitive information, such as names, email addresses, phone numbers or addresses; or</p>
+<p>(c) infringes or can possibly infringe rights, including intellectual property rights (such as copyrights and trademarks) of others; or</p>
+<p>(d) is or can be taken by any others as being harmful, threatening, abusive, harassing, vulgar, obscene, invasive of privacy, immoral or otherwise offensive or illegal or prohibited by the terms and conditions of any of the services or media via which you choose to share, publish or send Your Content.<br>
+&nbsp;<br>
+<strong>
+7. Our use of Your Content</strong></p>
+<p>(a) By submitting Your Content through any of the PAPL App or Online Services, you grant us (our successors and our related bodies corporate, partners and their successors) a royalty-free, irrevocable, non-exclusive, worldwide, licence to use, reproduce, modify, distribute, broadcast, sublicense and/or otherwise exploit part or all of Your Content in any medium (including but not limited to the Online Services), by any means and for any purpose (including commercial purposes), and to authorise others to do so and you acknowledge you own or have obtained all necessary rights in Your Content to grant this licence.</p>
+<p>(b) You acknowledge and agree that we, our successors, assignees and licensees may do or omit to do anything to Your Content which may infringe your moral rights in Your Content, including editing, altering and reproducing Your Content in any manner or context, with or without acknowledgement of authorship, in perpetuity throughout the world.<br>
+&nbsp;<br>
+<strong>
+8. Monitoring, modification and removal of Content</strong></p>
+<p>(a) We do not monitor, verify, approve, endorse, sanction, encourage, support or agree with Your Content or User Content including without limitation any comments, opinions or statements submitted, uploaded or otherwise posted on any of the Online Services.</p>
+<p>(b) We reserve the right, but have no obligation to, amend, supplement, delete or update Our Content, Your Content or User Content, without notice to you and at our sole discretion. However, if we become aware of any defamatory, misleading, false, offensive or otherwise illegal material (including in Your Content), we may remove such material without notice to you.<br>
+&nbsp;<br>
+<strong>
+9. Interactions with other Users</strong></p>
+<p>You acknowledge that it is possible that other Users may not comply with the Terms of Use, and could post Content which breaches our Terms of Use.</p>
+<p>You should be careful when communicating with and interacting with other Users of the PAPL APP or Online Services.</p>
+<p>You agree to indemnify and hold us harmless in connection with any actions of any other User and any dispute or claim that you may make against any other User, irrespective of that action, dispute or claim relating to the use of the PAPL App or Online Services.</p>
+<p><span style="font-weight: lighter;">Nothing in these Terms of Use authorises you to defend, compromise or settle any claim or proceeding on our behalf.</span></p>
+<p><strong>10. Updates and New Releases</strong></p>
+<p>(a) We may make available updates for the PAPL App or Online Services that may incorporate:</p>
+<p><span class="Apple-tab-span" style="white-space: pre;"> </span>(i) corrections of defects;</p>
+<p><span style="font-weight: lighter;"><span class="Apple-tab-span" style="white-space: pre;"> </span>(ii) fixes of minor bugs; and</span></p>
+<p><span style="font-weight: lighter;"><span class="Apple-tab-span" style="white-space: pre;"> </span>(iii) at our sole discretion, enhancements to the PAPL App or Online Services.</span></p>
+<p>
+(b) You may accept and use any update that we make available by downloading or accessing the update.<br>
+&nbsp;<br>
+<strong>
+11. No illegal use</strong></p>
+<p>You must not:</p>
+<p>(a) use the PAPL App or &nbsp;the Online Services in any manner or for any purpose which is prohibited by any laws or our Terms of Use;</p>
+<p>(b) modify, copy, publish, frame, distribute, upload, post, cache (other than as incidental to use of the PAPL App or &nbsp;Online Services), mirror or otherwise replicate, reproduce or communicate any part of the PAPL App or Online Services;</p>
+<p>(c) attempt in any way, directly or indirectly, to gain unauthorised access to the PAPL App or &nbsp;Online Services or content on the PAPL App or Online Services, including by means of data extraction or hacking tools (including data mining, spiders and robots) or other methods of data gathering, monitoring, extraction or use;</p>
+<p>(d) use our name or other intellectual property without our express and specific written consent, whether or not by means of metatags or any other invisible or hidden text; or</p>
+<p>(e) introduce any virus into the PAPL App or Online Services or network, or otherwise undermine the integrity of, damage or disrupt the PAPL App o Online Services, including its availability, format and content, or our network.<br>
+&nbsp;<br>
+<strong>
+12. Our Content</strong></p>
+<p>(a) You acknowledge that all materials displayed on or communicated through the PAPL App and Online Services, including without limitation all text, graphics, advertisements, names, logos and trademarks (whether registered or not), information and newsletters (Our Content) are our property or the property of their respective owners (including other Users) and are protected by copyright, trademark and other intellectual property laws.</p>
+<p>(b) You may use Our Content for your personal purposes. Except where the law expressly permits, you may not otherwise in any form or by any means, use, reproduce, modify, distribute, publish or create derivative works from, or use for any commercial purpose, any part of Our Content.</p>
+<p>(c) Our Content has been compiled for your convenience and may include information sourced from third parties. Whilst we take reasonable precautions to ensure content is correct and up to date, to the extent permitted by law, we make no representations or warranties about the accuracy, completeness, security or currency of Our Content or User Content and have no liability to you for your use or reliance on Our Content or User Content.<br>
+&nbsp;<br>
+<strong>
+13. Outbound links</strong></p>
+<p>The PAPL App and Online Services may:</p>
+<p>(a) contain links to;</p>
+<p>(b) or allow you to share, post or send Your Content or other content and information via, third party websites, applications or services, including social media like Facebook and Twitter, your personal email account or messaging, which in turn may contain hyperlinks to further third party websites, applications or services (collectively Linked Services).</p>
+<p>Access to Linked Services is provided for convenience only, and you are responsible for evaluating whether you want to use a Linked Service.</p>
+<p>You acknowledge that:</p>
+<p>(a) when accessing and using any Linked Services, you will be subject to their terms and conditions of use;</p>
+<p>(b) we do not control or endorse and we are not responsible for any features, content, products or other materials on or available from a Linked Service;</p>
+<p>(c) we are not a party to your relationship with the owners, operators or other users of a Linked Service;</p>
+<p>(d) any rights, claims or actions you may have in respect of a Linked Service or its use may only be brought directly against the owners, operators or other users of the Linked Service; and</p>
+<p>(e) we may receive payments and/or commissions from owners or operators of Linked Services and you will not have any claims, benefits or rights on these payments.<br>
+&nbsp;<br>
+<strong>
+14. Purchase of services</strong></p>
+<p>When you purchase any services that are offered through our PAPL App and Online Services (such as parking bookings) (Services), you agree to abide by the terms and conditions applicable to that Service and any associated Linked Services, including but not limited to the obligation to pay any applicable fees.<br>
+&nbsp;&nbsp;<br>
+<strong>
+15. Liability and indemnity</strong></p>
+<p>In relation to the PAPL App and Online Services, PAPL does not represent, warrant or guarantee their:</p>
+<p>(a) the accuracy, reliability, timeliness, completeness or suitability of the content or that they are provided or available without errors, omissions or viruses;</p>
+<p>(b) merchantability or fitness for any particular purpose of any product or service contained or referred to; or</p>
+<p>(c) continuous, uninterrupted, error free, virus free or secure access.<br>
+<br>
+PAPL does not accept any responsibility or liability for direct, indirect or consequential loss, damage or inconvenience suffered or incurred by any person as a result of use of the PAPL App or Online Services or the reliance on any content on the PAPL App or Online Services.</p>
+<p>You are responsible for your use of the PAPL App and Online Services and agree to indemnify us in respect of any claim made against us as a consequence of, in relation to, or in any way arising out of your use PAPL App or Online Services.</p>
+<p><strong>16. Australian Consumer Law</strong></p>
+<p>To the extent that PAPL is unable to limit its liability as a result of a warranty or condition implied by law, PAPL expressly limits its liability to the maximum extent possible to the flowing, the choice of which is at PAPL’s sole discretion:</p>
+<p>(a) In the case of goods – the replacement of the goods or supply of equivalent goods or the repayment of the cost of replacing the goods or acquiring equivalent goods.</p>
+<p>(b) In the case of services – the supply of the services again or the repayment of the cost of having the services supplied again.&nbsp;<br>
+<br>
+<strong>
+17. Sites Disclaimers</strong></p>
+<p>Subject to paragraph 16 and to the extent the law permits:</p>
+<p>(a) you acknowledge that your use of the PAPL APP, &nbsp;Online Services, Our Content, Your Content, User Content and Linked Services, is entirely at your own risk and are provided without warranty, either express or implied.</p>
+<p>(b) we do not accept responsibility for any interference, loss or damage to your data, computer system, or mobile device which arises in connection with your use of the Online Services. Although reasonable precautions have been taken, we do not guarantee the Online Services will be continually available or that there will be no failures, errors or omissions or loss of transmitted information, or that no viruses will be transmitted through the Online Services.<br>
+&nbsp;<br>
+<strong>
+18. Termination</strong></p>
+<p>The Online Services licence is effective until terminated by you or us. Your rights under this licence will terminate automatically without notice from us if you fail to comply with these Terms of Use or you delete the PAPL App or Online Services from all mobile devices upon which the Online Services are installed and iTunes on your personal computer.<br>
+&nbsp;<br>
+<strong>
                     </div>
                 </div>
-                
-     
-<!--      <div class="page-navigator" th:if="${paginationTickets.totalPages > 1}">
-         <th:block th:each="page : ${paginationTickets.navigationPages}">
-         
-            <a th:href="@{|/ticketList?page=${page}|}" th:if="${page != -1}"
-               class="nav-item" th:utext="${page}"></a>
-               
-            <span class="nav-item" th:if="${page == -1}"> ... </span>
-             
-         </th:block>
-      </div>-->
-       <div class="cart">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <p>
-                            <span class="ticket-count">0</span> Tickets <span class="divider"></span> Total: $ <span class="total-amount">0</span></p>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="text-right">
-                            <a class="btn disabled" data-toggle="modal" data-target="#ticket-details">PROCEED</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
+
+         
 
         </div>
     </div>
@@ -184,13 +305,14 @@
                         <div class="ticket-type"></div>
                         <ul>
                             <li>Tickets: <span class="ticket-count"></span></li>
-                            <li>Price: <span class="ticket-amount"></span></li>
+                            <li>Price: $</p></li>
                             <hr>
-                            <li>Total: <span class="total-amount"></span></li>
+                            <li>Total: 
+                            </li>
                         </ul>
                     </div>
 
-<!--                    <div class="contactForm">
+                    <div class="contactForm">
                         <h3>Share contact Details</h3>
                         <form>
                             <div class="form-group">
@@ -207,7 +329,7 @@
 
                             <a type="submit" class="btn">Confirm</a>
                         </form>
-                    </div>-->
+                    </div>
 
 
 
@@ -217,11 +339,13 @@
     </div>
 
 
+
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- plugins -->
-    <script th:src="@{js/bootstrap.min.js}"></script>
-    <script th:src="@{js/allscript.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+    
 </body>
 
 </html>
