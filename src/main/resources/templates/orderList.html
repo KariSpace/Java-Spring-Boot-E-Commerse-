@@ -46,8 +46,8 @@
                         <div class="row">
                             <div>
                                 <div class="ticketBox" data-ticket-price="500">
-                                    <h1 class="center"> Total Order Count: &nbsp;
-                                    <div th:utext="${paginationResult.totalRecords}"></div> </h1>
+                                    <h3 class="center"> Total Order Count: &nbsp;
+                                    <div th:utext="${paginationResult.totalRecords}"></div> </h3>
                                     <div class="inactiveStatus"></div>
 
                                     <div class="row">
@@ -73,12 +73,12 @@
                                                 </tr>
                                             </table>
                                             <br>
-                                                <a th:href="@{/ticketList}" class="nav-item"> Back to tickets </a>
+                                                <a th:href="@{/ticketList}" class="nav-item center"> Back to tickets </a>
                                             <div class="page-navigator" th:if="${paginationResult.totalPages > 1}">
                                                 <th:block th:each="page: ${paginationResult.navigationPages}">
                                                     <a th:if="${page != -1}" class="nav-item" th:href="@{|/admin/orderList?page=${page}|}" th:utext="${page}"></a>
 
-                                                    <span th:if="${page == -1}" class="nav-item center"> ... </span>
+                                                    <span th:if="${page == -1}" class="nav-item "> ... </span>
                                                 </th:block>
                                                 
                                             </div>
