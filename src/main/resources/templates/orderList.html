@@ -52,7 +52,7 @@
 
                                     <div class="row">
                                         <div class="ticket">
-                                            <table class="tg">
+                                            <table class="tg col-sm-12 ">
                                                 <tr>
                                                     <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Num</span><br></th>
                                                     <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Date</span></th>
@@ -73,7 +73,7 @@
                                                 </tr>
                                             </table>
                                             <br>
-                                                <a th:href="@{/ticketList}" class="nav-item center"> Back to tickets </a>
+                                               
                                             <div class="page-navigator" th:if="${paginationResult.totalPages > 1}">
                                                 <th:block th:each="page: ${paginationResult.navigationPages}">
                                                     <a th:if="${page != -1}" class="nav-item" th:href="@{|/admin/orderList?page=${page}|}" th:utext="${page}"></a>
@@ -82,6 +82,7 @@
                                                 </th:block>
                                                 
                                             </div>
+                                             <a th:href="@{/ticketList}" class="nav-item center col-sm-12 "> Back to tickets </a>
                                         </div>
                                     </div>
 

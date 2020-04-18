@@ -1,70 +1,149 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shopping Cart</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-      </style>
-   </head>
-   <body>
-       
-      <div class="page-title">My Cart</div>
-       
-      <th:block th:if="${cartForm == null || cartForm.cartLines == null || cartForm.cartLines.empty}">
-         <h2>There is no items in Cart</h2>
-         <a th:href="@{/ticketList}">Show Ticket List</a>
-      </th:block>
-       
-      <th:block th:if="${cartForm != null && cartForm.cartLines != null && !cartForm.cartLines.empty}">
-         <form method="POST" th:object="${cartForm}" th:action="@{/shoppingCart}">
-          
-               <div class="ticket-preview-container"
-                        th:each="cartLineInfo, varStatus : ${cartForm.cartLines}">
-                  <ul>
-                     
-                     <li>Name: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></li>
-                     <li>Price:
-                        <span class="price"
-                           th:utext="${#numbers.formatDecimal(cartLineInfo.ticketInfo.price,3,2,'COMMA')}">
-                        </span>
-                     </li>
-                     <li>Quantity:
-                        <span
-                            th:name="|cartLines[${varStatus.index}].quantity|"
-                            th:utext=="${cartLineInfo.quantity}" />
-                      
-                     </li>
-                     <li>Subtotal:
-                        <span class="subtotal"
-                           th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
-                        </span>
-                     </li>
-                     <li>
-                        <a th:href="@{|/shoppingCartRemoveTicket?code=${cartLineInfo.ticketInfo.code}|}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Buy Ticket</title>
+
+
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom1.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <div class="loader">
+        <div>
+            <img th:src="@{images/icons/preloader.gif}" />
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-7 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+                        <h1>Сontrol Panel</h1>
+                    </div>
+
+                    <h2>
+                        My Cart
+                    </h2>
+                </div>
+            </div>
+            <div class="col-sm-5 right-wrapper">
+                <div class="event-ticket-wrapper">
+
+                    <div class="event-tab">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buyTicket" aria-controls="buyTicket" role="tab" data-toggle="tab">My cart</a></li>
+
+                            <li role="presentation" ><a th:href="@{/ticketList}">Tickets list</a></li>
+                            <li role="presentation">
+                                <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                                    <a th:href="@{/admin/orderList}">ORDER LIST</a>
+                                </th:block>
+                            </li>
+
+                            <li role="presentation">
+                                <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+                                    <a th:href="@{/admin/ticket}">Create</a>
+                                </th:block>
+                            </li>
+
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                                <div class="row">
+                                    <th:block th:if="${cartForm == null || cartForm.cartLines == null || cartForm.cartLines.empty}">
+                                                    <h2 style="text-align: center; margin-top: 10%;">There is no items in Cart</h2>
+                                                   
+                                    </th:block>
+                                    <th:block th:if="${cartForm != null && cartForm.cartLines != null && !cartForm.cartLines.empty}"> 
+                                       <div class="ticket-preview-container" th:each="cartLineInfo, varStatus : ${cartForm.cartLines}">
+                                            <div class="col-md-6">
+                                        <div class="ticketBox" data-ticket-price="500">
+                                            <div class="inactiveStatus"></div>
+
+                                            <div class="row">
+                                                    
+
+                                                        
+                                                            <ul>
+                                                                <li>Name: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></li>
+                                                                <li>Price:
+                                                                    <span class="price" th:utext="${#numbers.formatDecimal(cartLineInfo.ticketInfo.price,3,2,'COMMA')}">
+                                                                   </span>
+                                                                </li>
+                                                                <li>Quantity:
+                                                                    <span th:name="|cartLines[${varStatus.index}].quantity|" th:utext=="${cartLineInfo.quantity}" />
+
+                                                                </li>
+                                                                <li>Subtotal:
+                                                                    <span class="subtotal" th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
+                                                                   </span>
+                                                                </li>
+                                                                
+                                                            </ul>
+                                                        
+                                                  
+                                            </div>
+                                            <div class="ticket-description">
+                                                 <a th:href="@{|/shoppingCartRemoveTicket?code=${cartLineInfo.ticketInfo.code}|}">
                         Delete
                         </a>
-                     </li>
-                  </ul>
-               </div>
-             
-            <div style="clear: both"></div>
-            <a class="navi-item"
-               th:href="@{/shoppingCartCustomer}">Enter Customer Info</a>
-            <a class="navi-item"
-               th:href="@{/ticketList}">Continue Buy</a>
-            
-         </form>
-         
-      </th:block>
-       
-      
-       
-   </body>
+                                            </div>
+
+                                        </div></div>
+                                    </div>  
+                                </th:block>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="cart ">
+                        <div class="row"  style=" margin: 0 auto;">
+
+                            <a class="btn " data-toggle="modal" th:href="@{/shoppingCartCustomer}">checkout</a>
+
+                            <a class="btn btn-grey" data-toggle="modal" th:href="@{/ticketList}">CONTINE TO BUY</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+
+</body>
+
 </html>

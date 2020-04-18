@@ -52,9 +52,23 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#buyTicket" aria-controls="buyTicket" role="tab" data-toggle="tab">Tickets</a></li>
                             <li role="presentation"><a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">Airport</a></li>
-                            <li role="presentation"><a href="#termCondition" aria-controls="termCondition" role="tab" data-toggle="tab">ORDER LIST</a></li>
-                            <li role="presentation"><a href="#termCondition" aria-controls="termCondition" role="tab" data-toggle="tab">CREATE TICKET</a></li>
-                        </ul>
+                            <li role="presentation"><a href="#termCondition" aria-controls="termCondition" role="tab" data-toggle="tab">Terms & Conditions</a></li>
+                            
+                            
+                            <li role="presentation">
+                            <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                                <a th:href="@{/admin/orderList}">ORDER LIST</a>
+                            </th:block>
+                            </li>
+                            
+                             <li role="presentation">
+                            <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+                                <a th:href="@{/admin/ticket}">Create</a>    
+                             </th:block>
+                            </li>
+                            <li role="presentation"><a aria-controls="termCondition" role="tab" th:href="@{/shoppingCart}"> MY CART</a></li>
+                            
+                             </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
