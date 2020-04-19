@@ -1,165 +1,56 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Ticket List</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
-            <style>html {
-    background: white;
-}
-h3 {
-    margin: 0px;
-    padding: 0px;
-}
-body {
-    max-width: 860px;
-    min-width: 360px;
-    margin: 0px auto;
-    background: #F8F8F8;
-    padding:0px 5px;
-    text-align:center;
-}
-  
-.page-title  {
-    font-size:120%;
-    text-align: left;
-    margin:10px 0px;
-}
-.header-container {
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-    position: relative;
-    background: #5f5f5f;
-    color: white;
-}
-.header-container .header-bar  {
-    position: absolute;
-    right: 10px;
-    bottom: 20px;
-}
-.header-container .header-bar  a  {
-    color: white;
-    font-size: bold;
-}
-  
-.footer-container {
-    text-align: center;
-    margin-top: 10px;
-    padding: 5px 0px 0px 0px;
-    border-top: 1px solid #ccc;
-}
-.menu-container {
-    text-align: right;
-    margin: 10px 5px;
-}
-.menu-container a {
-    margin: 5px 5px 5px 10px;
-    color: #004d99;
-    font-weight: bold;
-    text-decoration: none;
-}
-  
-.site-name {
-    font-size:200%;
-    margin:10px 10px 10px 0px;
-    padding: 5px;
-}
-  
-.container  {
-    margin: 5px 0px;
-}
-  
-.demo-container, .login-container, .account-container {
-    padding: 5px;
-    border: 1px solid #ccc;
-    text-align:left;
-    margin:20px 0px;
-}
-  
-.customer-info-container {
-    text-align: left;
-    border: 1px solid #ccc;
-    padding: 0px 5px;
-}
-.ticket-preview-container {
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 250px;
-    margin: 10px ;
-    display: inline-block;
-    text-align:left;
-}
-  
-.ticket-preview-container input {
-    width: 50px;
-}
-  
-  
-.ticket-image {
-    width: 120px;
-    height: 80px;
-}
-  
-ul {
-    list-style-type: none;
-    padding-left: 5px;
-    margin:5px;
-}
-  
-  
-.navi-item {
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-update-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-send-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.error-message {
-    font-size: 90%;
-    color: red;
-    font-style: italic;
-}
-  
-.price {
-    color: blue;
-    font-weight: bold;
-}
-  
-.subtotal {
-    color: red;
-    font-weight: bold;
-}
-  
-.total {
-    color: red;
-    font-weight: bold;
-    font-size: 120%;
-}
-  
-table td {
-    padding: 5px;
-}
-      </style>
-   </head>
-   <body>
-      <th:block th:include="/_header"></th:block>
-      <th:block th:include="/_menu"></th:block>
-       
-      <div class="page-title">Order Info</div>
-       
-      <div class="customer-info-container">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Order List</title>
+   
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom2.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+</head>
+
+<body>
+     
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+
+                    </div>
+
+                    <h2>
+                        Order <br> INFO
+                    </h2>
+                </div>
+            </div>
+
+            <div class="event-tab">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                        <div class="row">
+                            <div>
+                                <div class="ticketBox" data-ticket-price="500">
+                                    
+                                    <div class="inactiveStatus"></div>
+
+                                    <div class="row">
+                                        <div class="ticket">
+                                             <div class="customer-info-container">
          <h3>Customer Information:</h3>
          <ul>
             <li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
@@ -170,30 +61,64 @@ table td {
          <h3>Order Summary:</h3>
          <ul>
             <li>Total:
-               <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
+               <span class="total" style ="color: red" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
                </span>
             </li>
          </ul>
       </div>
-      <br/>
-      <table border="1" style="width:100%">
-         <tr>
-            <th>Ticket Code</th>
-            <th>Ticket Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Amount</th>
-         </tr>
-         <tr th:each="orderDetailInfo : ${orderInfo.details}">
-            <td th:utext="${orderDetailInfo.ticketCode}"></td>
-            <td th:utext="${orderDetailInfo.ticketName}"></td>
-            <td th:utext="${orderDetailInfo.quanity}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
-         </tr>
-      </table>
-       
-      <th:block th:include="/_footer"></th:block>
-       
-   </body>
+                                            <table class="tg col-md-12 ">
+                                                <tr>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Num</span><br></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Order Date</span></th>
+                                                    <th class="tg-t87r"><span style="font-weight:700;font-style:normal">Customer Name</span><br></th>
+                                                    <th class="tg-t87r">Customer Address</th>
+                                                    <th class="tg-t87r">Customer Email</th>
+                                                   
+                                                </tr>
+                                                <tr th:each="orderDetailInfo : ${orderInfo.details}">
+                                                    <td th:utext="${orderDetailInfo.ticketCode}"></td>
+                                                    <td th:utext="${orderDetailInfo.ticketName}"></td>
+                                                    <td th:utext="${orderDetailInfo.quanity}"></td>
+                                                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
+                                                    <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
+                                                 </tr>
+                                            </table>
+                                            <br>
+                                               
+                                           
+                                              <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+      <a  class="nav-item center col-sm-12 " th:href="@{/admin/orderList}">
+      back to Order List
+      </a>
+      
+   </th:block> </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <!-- jQuery  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+</body>
+
 </html>

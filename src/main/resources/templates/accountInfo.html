@@ -25,11 +25,7 @@
 
 <body>
 
-    <div class="loader">
-        <div>
-            <img th:src="@{images/icons/preloader.gif}" />
-        </div>
-    </div>
+ 
 
     <div class="container-fluid">
         <div class="row">
@@ -40,7 +36,7 @@
                     </div>
 
                     <h2>
-                        My Cart
+                        Admin panel
                     </h2>
                 </div>
             </div>
@@ -72,7 +68,7 @@
                             <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
                                 <div class="row">
                                
-                                    <h1 style="text-align: center">  User Name: <span th:utext="${#request.userPrincipal.name}"></span></h1>
+                                    <h1 style="text-align: center; margin-top: 50px">  User Name: <span th:utext="${#request.userPrincipal.name}"></span></h1>
 
                   <h3 style="text-align: center" th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></h3>
 
