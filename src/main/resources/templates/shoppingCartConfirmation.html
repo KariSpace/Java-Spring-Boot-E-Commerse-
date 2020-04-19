@@ -1,31 +1,65 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shopping Cart Confirmation</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
-            
-   </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Order List</title>
+   
+    <!-- Bootstrap -->
+        <link rel="stylesheet" th:href="@{/colorlib/css/style.css}">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom2.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+</head>
    <body>
-      <th:block th:include="/_header"></th:block>
-      <th:block th:include="/_menu"></th:block>
-       
-      <div class="page-title">Confirmation</div>
-      <div class="customer-info-container">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-5 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+
+                    </div>
+
+                    <h2>
+                        Order <br> INFO
+                    </h2>
+                </div>
+            </div>
+
+            <div class="event-tab">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                        <div class="row">
+                            <div>
+                                <div class="ticketBox" data-ticket-price="500">
+                                    
+                                    <div class="inactiveStatus"></div>
+
+                                    <div class="row">
+                                        <div class="ticket">
+                                            
+                                                 <div class="customer-info-container" style=" margin-left: 30px;">
          <h3>Customer Information:</h3>
-         <ul>
+         <p>
             <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
             <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
             <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
             <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
-         </ul>
-         <h3>Cart Summary:</h3>
+         </p>
+        <h3>Cart Summary:</h3>
          <ul>
             <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
             <li>Total: &nbsp;
@@ -37,44 +71,66 @@ and open the template in the editor.
       </div>
       <form method="POST" th:action="@{/shoppingCartConfirmation}">
          <!-- Edit Cart -->
-         <a class="navi-item" th:href="@{/shoppingCart}">
-         Edit Cart
-         </a>
+         <a class="btn navi-item" th:href="@{/shoppingCart}" style="margin: 20px;background: #0f52c5;">
+         Edit Cart</a>
+
          <!-- Edit Customer Info -->
-         <a class="navi-item" th:href="@{/shoppingCartCustomer}">
-         Edit Customer Info
-         </a>
+ 
+         <a class="navi-item btn" th:href="@{/shoppingCartCustomer}" style="background:#0f52c5; margin:20px;">
+         Edit Customer Info </a>
          <!-- Send/Save -->
-         <input type="submit" value="Send" class="button-send-sc" />
+         <button type="submit" value="Send" class="btn" style="margin:20px;"> SUBMIT </button>
       </form>
-      <div class="container">
-         <div class="ticket-preview-container" th:each="cartLineInfo : ${myCart.cartLines}">
-            <ul>
-               <li>
-                  <img class="ticket-image"
-                     src="@{|/ticketImage?code=${cartLineInfo.ticketInfo.code}|}" />
-               </li>
-               <li>
+                                             <div  style="margin: 30px;">
+         <div  th:each="cartLineInfo : ${myCart.cartLines}">
+            <div>
+               <p>
                   Code: <span th:utext="${cartLineInfo.ticketInfo.code}"></span>
                   <input
                      type="hidden" name="code" th:value="${cartLineInfo.ticketInfo.code}" />
-               </li>
-               <li>Name: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></li>
-               <li>Price:
+               </p>
+               <p>Name: <span th:utext="${cartLineInfo.ticketInfo.name}"></span></p>
+               <p>Price:
                   <span class="price"
                      th:utext="${#numbers.formatDecimal(cartLineInfo.ticketInfo.price,3,2,'COMMA')}">
                   </span>
-               </li>
-               <li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
-               <li>Subtotal:
+               </p>
+               <p>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></p>
+               <p>Subtotal:
                   <span class="subtotal"
                      th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
                   </span>
-               </li>
-            </ul>
+               </p>
+            </div>
          </div>
-      </div>
-       
-       
-   </body>
+      </div> </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <!-- jQuery  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+</body>
+
 </html>
