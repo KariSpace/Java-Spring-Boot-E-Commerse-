@@ -1,180 +1,100 @@
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Account Info</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
-           
-      <style>
-                html {
-    background: white;
-}
-h3 {
-    margin: 0px;
-    padding: 0px;
-}
-body {
-    max-width: 860px;
-    min-width: 360px;
-    margin: 0px auto;
-    background: #F8F8F8;
-    padding:0px 5px;
-    text-align:center;
-}
-  
-.page-title  {
-    font-size:120%;
-    text-align: left;
-    margin:10px 0px;
-}
-.header-container {
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-    position: relative;
-    background: #5f5f5f;
-    color: white;
-}
-.header-container .header-bar  {
-    position: absolute;
-    right: 10px;
-    bottom: 20px;
-}
-.header-container .header-bar  a  {
-    color: white;
-    font-size: bold;
-}
-  
-.footer-container {
-    text-align: center;
-    margin-top: 10px;
-    padding: 5px 0px 0px 0px;
-    border-top: 1px solid #ccc;
-}
-.menu-container {
-    text-align: right;
-    margin: 10px 5px;
-}
-.menu-container a {
-    margin: 5px 5px 5px 10px;
-    color: #004d99;
-    font-weight: bold;
-    text-decoration: none;
-}
-  
-.site-name {
-    font-size:200%;
-    margin:10px 10px 10px 0px;
-    padding: 5px;
-}
-  
-.container  {
-    margin: 5px 0px;
-}
-  
-.demo-container, .login-container, .account-container {
-    padding: 5px;
-    border: 1px solid #ccc;
-    text-align:left;
-    margin:20px 0px;
-}
-  
-.customer-info-container {
-    text-align: left;
-    border: 1px solid #ccc;
-    padding: 0px 5px;
-}
-.ticket-preview-container {
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 250px;
-    margin: 10px ;
-    display: inline-block;
-    text-align:left;
-}
-  
-.ticket-preview-container input {
-    width: 50px;
-}
-  
-  
-.ticket-image {
-    width: 120px;
-    height: 80px;
-}
-  
-ul {
-    list-style-type: none;
-    padding-left: 5px;
-    margin:5px;
-}
-  
-  
-.navi-item {
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-update-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-send-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.error-message {
-    font-size: 90%;
-    color: red;
-    font-style: italic;
-}
-  
-.price {
-    color: blue;
-    font-weight: bold;
-}
-  
-.subtotal {
-    color: red;
-    font-weight: bold;
-}
-  
-.total {
-    color: red;
-    font-weight: bold;
-    font-size: 120%;
-}
-  
-table td {
-    padding: 5px;
-}
-      </style>
-   </head>
-   <body>
-    
-      <th:block th:include="/_header"></th:block>
-      <th:block th:include="/_menu"></th:block>
-       
-      <div class="page-title">Account Info</div>
-      <div class="account-container">
-         <ul>
-            <li>User Name: <span th:utext="${#request.userPrincipal.name}"></span></li>
-            <li>
-               Role:
-               <ul>
-                  <li th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></li>
-               </ul>
-            </li>
-         </ul>
-      </div>
-       
-      <th:block th:include="/_footer"></th:block>
-       
-   </body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Admin Panel</title>
+
+
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom1.css}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <div class="loader">
+        <div>
+            <img th:src="@{images/icons/preloader.gif}" />
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-7 left-wrapper">
+                <div class="event-banner-wrapper">
+                    <div class="logo">
+                        <h1>Сontrol Panel</h1>
+                    </div>
+
+                    <h2>
+                        My Cart
+                    </h2>
+                </div>
+            </div>
+            <div class="col-sm-5 right-wrapper">
+                <div class="event-ticket-wrapper">
+
+                    <div class="event-tab">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buyTicket" aria-controls="buyTicket" role="tab" data-toggle="tab">Admin panel</a></li>
+
+                            <li role="presentation" ><a th:href="@{/ticketList}">Tickets list</a></li>
+                            <li role="presentation">
+                                <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                                    <a th:href="@{/admin/orderList}">ORDER LIST</a>
+                                </th:block>
+                            </li>
+
+                            <li role="presentation">
+                                <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+                                    <a th:href="@{/admin/ticket}">Create</a>
+                                </th:block>
+                            </li>
+
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="buyTicket">
+                                <div class="row">
+                               
+                                    <h1 style="text-align: center">  User Name: <span th:utext="${#request.userPrincipal.name}"></span></h1>
+
+                  <h3 style="text-align: center" th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></h3>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- plugins -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/allscript.js}"></script>
+
+</body>
+
 </html>

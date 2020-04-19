@@ -1,169 +1,75 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Access Denied</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
-            <style>html {
-    background: white;
-}
-h3 {
-    margin: 0px;
-    padding: 0px;
-}
-body {
-    max-width: 860px;
-    min-width: 360px;
-    margin: 0px auto;
-    background: #F8F8F8;
-    padding:0px 5px;
-    text-align:center;
-}
-  
-.page-title  {
-    font-size:120%;
-    text-align: left;
-    margin:10px 0px;
-}
-.header-container {
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-    position: relative;
-    background: #5f5f5f;
-    color: white;
-}
-.header-container .header-bar  {
-    position: absolute;
-    right: 10px;
-    bottom: 20px;
-}
-.header-container .header-bar  a  {
-    color: white;
-    font-size: bold;
-}
-  
-.footer-container {
-    text-align: center;
-    margin-top: 10px;
-    padding: 5px 0px 0px 0px;
-    border-top: 1px solid #ccc;
-}
-.menu-container {
-    text-align: right;
-    margin: 10px 5px;
-}
-.menu-container a {
-    margin: 5px 5px 5px 10px;
-    color: #004d99;
-    font-weight: bold;
-    text-decoration: none;
-}
-  
-.site-name {
-    font-size:200%;
-    margin:10px 10px 10px 0px;
-    padding: 5px;
-}
-  
-.container  {
-    margin: 5px 0px;
-}
-  
-.demo-container, .login-container, .account-container {
-    padding: 5px;
-    border: 1px solid #ccc;
-    text-align:left;
-    margin:20px 0px;
-}
-  
-.customer-info-container {
-    text-align: left;
-    border: 1px solid #ccc;
-    padding: 0px 5px;
-}
-.ticket-preview-container {
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 250px;
-    margin: 10px ;
-    display: inline-block;
-    text-align:left;
-}
-  
-.ticket-preview-container input {
-    width: 50px;
-}
-  
-  
-.ticket-image {
-    width: 120px;
-    height: 80px;
-}
-  
-ul {
-    list-style-type: none;
-    padding-left: 5px;
-    margin:5px;
-}
-  
-  
-.navi-item {
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-update-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.button-send-sc {
-    color: red;
-    margin: 5px 5px 5px 20px;
-}
-  
-.error-message {
-    font-size: 90%;
-    color: red;
-    font-style: italic;
-}
-  
-.price {
-    color: blue;
-    font-weight: bold;
-}
-  
-.subtotal {
-    color: red;
-    font-weight: bold;
-}
-  
-.total {
-    color: red;
-    font-weight: bold;
-    font-size: 120%;
-}
-  
-table td {
-    padding: 5px;
-}
-      </style>
-   </head>
-    
-   <body>
-    
-      <th:block th:include="/_header"></th:block>
-      <th:block th:include="/_menu"></th:block>
-       
-      <div class="page-title">Access Denied!</div>
-      <h3 style="color:red;">Sorry, you can not access this page!</h3>
-       
-      <th:block th:include="/_footer"></th:block>
-       
-   </body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1}">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" th:href="@{/Login_v16/images/icons/favicon.ico}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/animsition/css/animsition.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/vendor/daterangepicker/daterangepicker.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/Login_v16/css/main.css}">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100" >
+            <div class="wrap-login100 p-t-30 p-b-50">
+               
+              
+                <form class="login100-form validate-form p-b-33 p-t-5" method="POST" th:action="@{/j_spring_security_check}">
+                <div class="page-title" style="text-align: center;" >Access Denied!</div>
+                <h3 style="color:red; text-align: center; margin-top: 20px" >Sorry, you can not  </h3> <h3 style="color:red; text-align: center">access this page!</h3>
+                <div class="container-login100-form-btn m-t-32">
+                    <button class="login100-form-btn" th:href="@{/admin/login}"> LOGIN						
+						</button>
+                    </div>
+                </form>
+                
+            
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script th:src="@{/Login_v16/vendor/jquery/jquery-3.2.1.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/vendor/animsition/js/animsition.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/vendor/bootstrap/js/popper.js}"></script>
+    <script th:src="@{Login_v16/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/vendor/select2/select2.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/vendor/daterangepicker/moment.min.js}"></script>
+    <script th:src="@{Login_v16/vendor/datera/ngepicker/daterangepicker.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/vendor/countdowntime/countdowntime.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{Login_v16/js/main.js}"></script>
+
+</body>
+
 </html>
