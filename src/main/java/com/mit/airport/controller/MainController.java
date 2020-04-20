@@ -90,7 +90,7 @@ public class MainController {
    public String listTicketHandler(Model model, //
          @RequestParam(value = "name", defaultValue = "") String likeName,
          @RequestParam(value = "page", defaultValue = "1") int page) {
-      final int maxResult = 5;
+      final int maxResult = 100;
       final int maxNavigationPage = 10;
  
       PaginationResult<TicketInfo> result = ticketDAO.queryTickets(page, //
@@ -260,9 +260,5 @@ public class MainController {
       model.addAttribute("lastOrderedCart", lastOrderedCart);
       return "shoppingCartFinalize";
    }
- 
-  
-     
-   
- 
+
 }

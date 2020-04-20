@@ -42,10 +42,10 @@
 
       <div class="container" style=" margin-top: 50px;">
          <h3 style="text-align: center; color: red;">Thank you for Order!</h3>
-         <h4 style="text-align: center;colour: red;display: flex;justify-content: center;"> Your order number is: <div th:utext="${lastOrderedCart.orderNum}"><div></h4>
+         <h4 style="text-align: center;colour: red;display: flex;justify-content: center;"> Your order number is: &nbsp; <div th:utext="${lastOrderedCart.orderNum}"><div></h4>
       </div>
                   <div class="container-login100-form-btn m-t-32">
-                      <a class="login100-form-btn" th:href="@{/ticketList}">   ticket List   </a>
+                      <a class="login100-form-btn" th:href="@{/ticketList}"> Back to ticket List   </a>
                     </div>
                 </form>
                 
