@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit ticket</title>
+     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
 
     <!-- Font Icon -->
     <link rel="stylesheet" th:href="@{colorlib/fonts/material-icon/css/material-design-iconic-font.min.css}">
@@ -13,7 +15,11 @@
     <link rel="stylesheet" th:href="@{/colorlib/css/style.css}">
 </head>
 <body>
-
+ <div class="loader">
+        <div>
+            <img th:src="@{images/icons/preloader.gif}" />
+        </div>
+    </div>
     <div class="main">
 
         <div class="container">
