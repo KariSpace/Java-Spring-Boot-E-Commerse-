@@ -4,7 +4,11 @@
 <head>
     <title>Login Page</title>
     <meta charset="UTF-8">
+	
     <meta name="viewport" content="width=device-width, initial-scale=1}">
+	    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" th:href="@{/Login_v16/images/icons/favicon.ico}" />
     <!--===============================================================================================-->
@@ -30,7 +34,11 @@
 </head>
 
 <body>
-
+<div class="loader">
+        <div>
+            <img th:src="@{images/icons/preloader.gif}" />
+        </div>
+    </div>
     <div class="limiter">
         <div class="container-login100" >
             <div class="wrap-login100 p-t-30 p-b-50">
